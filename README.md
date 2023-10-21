@@ -1,10 +1,21 @@
 # Machine Learning for Oxygen (ML4O2)
 
 ## Python environment
-  - Initialize conda command:
+  - Copy the env-ml4o2.yml file to your home directory
+  - Initialize conda command
 ```
-$ source ~/miniconda3/etc/profile.d/conda.sh
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate
 ```
+  - Then create a new environment using env-ml4o2.yml file. This may take a few minutes
+```
+conda env create --file env-ml4o2.yml
+```
+  - Once it is complete, make this environment available to the Jupyter Notebook:
+```
+python -m ipykernel install --user --name ml4o2 --display-name ML4O2
+```
+  - At this point the "ML4O2" environment should be ready to use in Jupyterlab/Jupyter Notebook. 
 
 ## Project scripts
   - develop/ stores scripts for development
