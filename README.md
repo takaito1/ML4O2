@@ -3,7 +3,7 @@
 ## Python environment
   - Initialize conda command:
     '''
-    source ~/miniconda3/etc/profile.d/conda.sh
+    $ source ~/miniconda3/etc/profile.d/conda.sh
     '''
 
 ## Project scripts
