@@ -355,4 +355,3 @@ dependencies:
   - zlib=1.2.13=hd590300_5
   - zstandard=0.21.0=py38ha98ab4e_1
   - zstd=1.5.5=hfc55251_0
-prefix: /glade/work/ito/miniconda3/envs/ml4o2
