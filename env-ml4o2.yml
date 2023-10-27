@@ -6,6 +6,7 @@ dependencies:
     - bottleneck
     - cartopy
     - cftime
+    - dask
     - ipykernel
     - jupyter
     - jupyterlab
@@ -27,8 +28,6 @@ dependencies:
     - zarr
     - scikit-learn
     - cmocean
-    - os 
     - joblib
-    - multiprocessing
     - pip:
             - PyCO2SYS
