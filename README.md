@@ -9,7 +9,7 @@ conda activate
 ```
   - Then create a new environment using env-ml4o2.yml file. This may take a few minutes
 ```
-conda env create --file env-ml4o2.yml
+conda env create --file export.yml
 ```
   - Once it is complete, make this environment available to the Jupyter Notebook:
 ```
