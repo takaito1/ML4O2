@@ -13,6 +13,7 @@ conda env create --file export.yml
 ```
   - Once it is complete, make this environment available to the Jupyter Notebook:
 ```
+conda activate ml4o2
 python -m ipykernel install --user --name ml4o2 --display-name ML4O2
 ```
   - At this point the "ML4O2" environment should be ready to use in Jupyterlab/Jupyter Notebook. 
