@@ -25,7 +25,7 @@ conda install -c conda-forge mamba
 ```
   - Install packages manually
 ```
-mamba install -c conda-forge numpy matplotlib pandas netcdf4 dask nc-time-axis cartopy seaborn gsw xarray scikit-learn scipy loblib ipykernel
+mamba install -c conda-forge numpy matplotlib pandas netcdf4 dask nc-time-axis cartopy seaborn gsw xarray scikit-learn scipy joblib ipykernel
 ```
   - Once it is complete, make this environment available to the Jupyter Notebook:
 ```
