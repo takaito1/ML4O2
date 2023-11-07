@@ -14,7 +14,13 @@ conda activate
   - Then create a new environment called ml4o2_v2.  
 ```
 conda create --name ml4o2_v2
+```
+  - Then activate ml4o2_v2.
+```
 conda activate ml4o2_v2
+```
+  - Then install mamba in ml4o2_v2.
+```
 conda install -c conda-forge mamba
 ```
   - Install packages manually
