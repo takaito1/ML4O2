@@ -11,19 +11,15 @@ rm -rf ~/miniconda3/miniconda.sh
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate
 ```
-  - Then create a new environment called ml4o2_v2. After this, do one of the following option (1) or (2). 
+  - Then create a new environment called ml4o2_v2.  
 ```
 conda create --name ml4o2_v2
 conda activate ml4o2_v2
 conda install -c conda-forge mamba
 ```
-  - Option (1) : Install packages manually
+  - Install packages manually
 ```
 mamba install -c conda-forge numpy matplotlib pandas netcdf4 dask nc-time-axis cartopy seaborn gsw xarray scikit-learn scipy loblib ipykernel
-```
-  - Option (2) : Clone from the package list file (ml4o2-packages.txt)
-```
-mamba create --name ml4o2_v2 --file ml4o2-packages.txt
 ```
   - Once it is complete, make this environment available to the Jupyter Notebook:
 ```
