@@ -29,7 +29,6 @@ mamba install -c conda-forge numpy matplotlib pandas netcdf4 dask nc-time-axis c
 ```
   - Once it is complete, make this environment available to the Jupyter Notebook:
 ```
-conda activate ml4o2_v2
 python -m ipykernel install --user --name ml4o2_v2 --display-name ML4O2_v2
 ```
   - At this point the "ML4O2_v2" environment should be ready to use in Jupyterlab/Jupyter Notebook. 
