@@ -33,6 +33,9 @@ python -m ipykernel install --user --name ml4o2_v2 --display-name ML4O2_v2
 ```
   - At this point the "ML4O2_v2" environment should be ready to use in Jupyterlab/Jupyter Notebook. 
 
+## Xarray tutorial
+- This video is a good introduction to X array [link](https://youtu.be/a339Q5F48UQ?si=mcCZE2vuptlOZPuE)
+
 ## Project scripts
-  - develop/ stores scripts for development
-  - Example for a data-driven modeling of O2 in the North Atlantic [python](https://github.com/takaito1/ML4O2/blob/main/o2mod_example_CV_v2.ipynb) This is a 3 dimensional version (v2) machine learning model, O2 = O2(T,S,lon,lat,year,month), 80-20 train-test split with K-fold cross validation. The algorithms include Random Forest Regression, shallow and deep Neural Network. 
+  - Updated script for [training](https://github.com/takaito1/ML4O2/blob/main/o2_train_202402.ipynb)
+  - Updated script for [projection](https://github.com/takaito1/ML4O2/blob/main/o2_project_202402.ipynb)
