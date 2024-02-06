@@ -44,3 +44,4 @@ python -m ipykernel install --user --name ml4o2_v2 --display-name ML4O2_v2
   - o2test_pred_vXXXXXX.npz : validation data (20% of the data from 80-20 train-test split)
   - Updated script for projection [o2_prject_202402.ipynb](https://github.com/takaito1/ML4O2/blob/main/o2_project_202402.ipynb) This script generates one output file in /glade/campaign/univ/ugit0034/ML4O2_results
   - O2map_vXXXXXX.nc
+  - Simple plot script: once you have generated a projection, examine its statistics using this script [Plots_ML4O2.ipynb](https://github.com/takaito1/ML4O2/blob/main/Plots_ML4O2.ipynb)
