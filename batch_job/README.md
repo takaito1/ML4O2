@@ -8,4 +8,4 @@
 - mkdir -p /glade/derecho/scratch/userid/ML4O2_temp
 - mkdir -p /glade/derecho/scratch/userid/WOD18_OSDCTD
 - mkdir -p /glade/derecho/scratch/userid/ML4O2_results
-- In run.pbs, change email address and source directory ()
+- In run.pbs, change email address and source directory (/glade/work/ito/ML4O2/batch_job)
