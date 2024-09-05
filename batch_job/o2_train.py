@@ -31,6 +31,7 @@ usrid=np.genfromtxt('userid',dtype='<U16')
 os.system('rm userid')
 os.system(f'mkdir -p /glade/derecho/scratch/{usrid}/ML4O2_temp/')
 os.system(f'mkdir -p /glade/derecho/scratch/{usrid}/ML4O2_results/')
+os.system(f'mkdir -p /glade/derecho/scratch/{usrid}/WOD18_OSDCTD/')
 #
 # version information
 ver = np.genfromtxt('data_XXX.txt',dtype='U11').tolist()
