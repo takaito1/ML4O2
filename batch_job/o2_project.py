@@ -53,10 +53,10 @@ else:
 #
 if selection[1] == '1':
     print('Ship-based O2 data will be used. Year_end = 2021')
-    endyear=2015
+    endyear=2021
 elif selection[1] == '2':
     print('Ship-based and Argo-O2 data will be used. Year_end = 2021')
-    endyear=2015
+    endyear=2021
 else:
     print('error - incorrect input data type')
 #
@@ -75,8 +75,6 @@ else:
 #
 if selection[3] == '1':
     print('EN4 dataset will be used for T/S input. ')
-elif selection[3] == '2':
-    print('ORAS4 dataset will be used for T/S input. ')
 else:
     print('error - incorrect T/S data type')
 #
@@ -107,7 +105,7 @@ else:
 # Define the input and output folders
 #
 diro = '/glade/derecho/scratch/ito/WOD18_OSDCTD/'
-dirf = '/glade/campaign/univ/ugit0034/ORAS4/TSN2/'
+dirf = '/glade/campaign/univ/ugit0034/EN4/L09_20x180x360/'
 dirin = '/glade/campaign/univ/ugit0034/WOD18_OSDCTD/'
 fosd='_1x1bin_osd_'
 fctd='_1x1bin_ctd_'
@@ -162,10 +160,7 @@ maz=np.squeeze(ma[kind,:,:])
 #
 mon=["%.2d" % i for i in np.arange(1,13,1)]
 #
-dc=xr.open_dataset(dirf+'ORAS4_TSN2_'+str(1965)+mon[0]+'.nc')
-dc.coords['lon'] = (dc.coords['lon'] + 180) % 360 - 180
-dc = dc.sortby(dc.lon)
-
+dc=xr.open_dataset(dirf+'EN4_TSN2_L09_180x360_'+str(1965)+mon[0]+'.nc')
 y=dc.lat.to_numpy()
 x=dc.lon.to_numpy()
 # use alternative x coordinate: longitude - 20
@@ -177,10 +172,14 @@ Nx=np.size(x)
 Nt=np.size(yrs)*12
 xx,yy=np.meshgrid(xalt,y)
 #
-depth1 = dc.depth.sel(depth=slice(0,1000)).to_numpy()
+depth1 = dc.depth.to_numpy()
 Nz1 = np.size(depth1)
 #
+
+
 # In[10]:
+
+
 # apply basin mask 
 def apply_basinmask(datain):
     if selection[2] == '1':
@@ -205,10 +204,7 @@ def apply_basinmask(datain):
 # get input data from full model
 def get_inputdata(zlev,it,year,mn):
     #dc = xr.open_dataset(dirf+'EN4_TSN2_G10_180x360_'+str(year)+mon[mn]+'.nc')
-    #dc = xr.open_dataset(dirf+'EN4_TSN2_L09_180x360_'+str(year)+mon[mn]+'.nc')
-    dc=xr.open_dataset(dirf+'ORAS4_TSN2_'+str(year)+mon[mn]+'.nc')
-    dc.coords['lon'] = (dc.coords['lon'] + 180) % 360 - 180
-    dc = dc.sortby(dc.lon)
+    dc = xr.open_dataset(dirf+'EN4_TSN2_L09_180x360_'+str(year)+mon[mn]+'.nc')
     soa=dc.SA.interp(depth=zlev).to_numpy().squeeze()
     toa=dc.CT.interp(depth=zlev).to_numpy().squeeze()
     sigma=dc.sigma0.interp(depth=zlev).to_numpy().squeeze()

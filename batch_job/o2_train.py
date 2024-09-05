@@ -30,8 +30,8 @@ warnings.filterwarnings('ignore')
 
 # version information
 ver = np.genfromtxt('data_XXX.txt',dtype='U11').tolist()
-date1='05062024' # Set this for saving today's date. Usually date1=today's date
-date2='05062024' # Set alternative date for re-running previous results
+date1='04152024' # Set this for saving today's date. Usually date1=today's date
+date2='04152024' # Set alternative date for re-running previous results
 rerun = False    # indicate again whether you are re-running previous results
 #
 dirout='/glade/derecho/scratch/ito/ML4O2_temp/'
@@ -62,7 +62,7 @@ if selection[1] == '1':
     endyear=2011
 elif selection[1] == '2':
     print('Ship-based and Argo-O2 data will be used. Year_end = 2021')
-    endyear=2015
+    endyear=2021
 else:
     print('error - incorrect input data type')
 #
@@ -81,8 +81,6 @@ else:
 #
 if selection[3] == '1':
     print('EN4 dataset will be used for T/S input. ')
-elif selection[3] == '2':
-    print('ORAS4 dataset will be used for T/S input. ')
 else:
     print('error - incorrect T/S data type')
 #
@@ -167,7 +165,7 @@ elif selection[2] == '5':
 else:
     print('error - incorrect O2 data type')
 #
-if selection[1]=='0':
+if selection[1]=='2':
     doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/o20_{bname0}_1x1_47lev.npy')
     dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/t0_{bname0}_1x1_47lev.npy')
     dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/s0_{bname0}_1x1_47lev.npy')
@@ -178,7 +176,7 @@ if selection[1]=='0':
     tc1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/month0_{bname0}_1x1_47lev.npy')
     dsga1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/sigma0_{bname0}_1x1_47lev.npy')
     dn2a1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/N20_{bname0}_1x1_47lev.npy')
-elif selection[1]=='2':
+elif selection[1]=='1':
     doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/o20_{bname0}_1x1_47lev_ship.npy')
     dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/t0_{bname0}_1x1_47lev_ship.npy')
     dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/s0_{bname0}_1x1_47lev_ship.npy')

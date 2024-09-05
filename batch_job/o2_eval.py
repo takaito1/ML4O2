@@ -17,7 +17,7 @@ import cartopy.crs as ccrs
 
 # select version
 ver = np.genfromtxt('data_XXX.txt',dtype='U11').tolist()
-date2='05062024'
+date2='04152024'
 dirout='/glade/derecho/scratch/ito/ML4O2_temp/'
 dirfin='/glade/derecho/scratch/ito/ML4O2_results/'
 
@@ -42,7 +42,7 @@ if selection[1] == '1':
     endyear=2011
 elif selection[1] == '2':
     print('Ship-based and Argo-O2 data will be used. Year_end = 2021')
-    endyear=2015
+    endyear=2021
 else:
     print('error - incorrect input data type')
 #
@@ -61,8 +61,6 @@ else:
 #
 if selection[3] == '1':
     print('EN4 dataset will be used for T/S input. ')
-elif selection[3] == '2':
-    print('ORAS4 dataset will be used for T/S input. ')
 else:
     print('error - incorrect T/S data type')
 #
