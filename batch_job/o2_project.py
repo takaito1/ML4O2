@@ -28,10 +28,14 @@ from multiprocessing import Pool
 
 
 # In[2]:
+os.system('echo $USER > userid')
+usrid=np.genfromtxt('userid',dtype='<U16')
+os.system('rm userid')
+#
 #
 # version information
 ver = np.genfromtxt('data_XXX.txt',dtype='U11').tolist()
-dirout='/glade/derecho/scratch/ito/ML4O2_results/'
+dirout=f'/glade/derecho/scratch/{usrid}/ML4O2_results/'
 # 
 # The version information will determine which basin / algorithm will be used to calculate the O2 maps. 
 
@@ -75,6 +79,8 @@ else:
 #
 if selection[3] == '1':
     print('EN4 dataset will be used for T/S input. ')
+elif selection[3] == '2':
+    print('ORAS4 dataset will be used for T/S input. ')
 else:
     print('error - incorrect T/S data type')
 #
@@ -104,8 +110,12 @@ else:
 
 # Define the input and output folders
 #
-diro = '/glade/derecho/scratch/ito/WOD18_OSDCTD/'
-dirf = '/glade/campaign/univ/ugit0034/EN4/L09_20x180x360/'
+diro = f'/glade/derecho/scratch/{usrid}/WOD18_OSDCTD/'
+if selection[3] == '1':
+    dirf = '/glade/campaign/univ/ugit0034/EN4/L09_20x180x360/'
+elif selection[3] == '2':
+    dirf = '/glade/campaign/univ/ugit0034/ORAS4/TSN2/'
+#
 dirin = '/glade/campaign/univ/ugit0034/WOD18_OSDCTD/'
 fosd='_1x1bin_osd_'
 fctd='_1x1bin_ctd_'
@@ -160,10 +170,16 @@ maz=np.squeeze(ma[kind,:,:])
 #
 mon=["%.2d" % i for i in np.arange(1,13,1)]
 #
-dc=xr.open_dataset(dirf+'EN4_TSN2_L09_180x360_'+str(1965)+mon[0]+'.nc')
+if selection[3]=='1':
+    dc=xr.open_dataset(dirf+'EN4_TSN2_L09_180x360_'+str(1965)+mon[0]+'.nc')
+elif selection[3]=='2':
+    dc=xr.open_dataset(dirf+'ORAS4_TSN2_'+str(1965)+mon[0]+'.nc')
+    dc.coords['lon'] = (dc.coords['lon'] + 180) % 360 - 180
+    dc = dc.sortby(dc.lon)
+#
+# use alternative x coordinate: longitude - 20
 y=dc.lat.to_numpy()
 x=dc.lon.to_numpy()
-# use alternative x coordinate: longitude - 20
 xa0 = x - 20
 xalt = np.where(xa0<0,xa0+360,xa0)
 #
@@ -203,8 +219,15 @@ def apply_basinmask(datain):
 
 # get input data from full model
 def get_inputdata(zlev,it,year,mn):
+    zlev=float(zlev)
     #dc = xr.open_dataset(dirf+'EN4_TSN2_G10_180x360_'+str(year)+mon[mn]+'.nc')
-    dc = xr.open_dataset(dirf+'EN4_TSN2_L09_180x360_'+str(year)+mon[mn]+'.nc')
+    if selection[3] == '1':
+        dc = xr.open_dataset(dirf+'EN4_TSN2_L09_180x360_'+str(year)+mon[mn]+'.nc')
+    elif selection[3] == '2':
+        dc=xr.open_dataset(dirf+'ORAS4_TSN2_'+str(year)+mon[0]+'.nc')
+        dc.coords['lon'] = (dc.coords['lon'] + 180) % 360 - 180
+        dc = dc.sortby(dc.lon)
+    #
     soa=dc.SA.interp(depth=zlev).to_numpy().squeeze()
     toa=dc.CT.interp(depth=zlev).to_numpy().squeeze()
     sigma=dc.sigma0.interp(depth=zlev).to_numpy().squeeze()
@@ -336,6 +359,7 @@ yout=dc.lat
 #
 for zlev_cnt,zlev in enumerate(zlevels):
     print(f'calculating {zlev}m')
+    zlev=float(zlev)
     maz = dsm.basin_mask.interp(depth=zlev).to_numpy()
     #kind=[idx for idx,elem in enumerate(Z) if elem==zlev]
     #maz=np.squeeze(ma[kind,:,:])

@@ -10,16 +10,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import joblib
 import cartopy.crs as ccrs
-
+import os
 
 # In[2]:
-
-
+os.system('echo $USER > userid')
+usrid=np.genfromtxt('userid',dtype='<U16')
+os.system('rm userid')
+#
 # select version
 ver = np.genfromtxt('data_XXX.txt',dtype='U11').tolist()
-date2='04152024'
-dirout='/glade/derecho/scratch/ito/ML4O2_temp/'
-dirfin='/glade/derecho/scratch/ito/ML4O2_results/'
+date2='09052024'
+dirout=f'/glade/derecho/scratch/{usrid}/ML4O2_temp/'
+dirfin=f'/glade/derecho/scratch/{usrid}/ML4O2_results/'
 
 
 # In[3]:
@@ -61,6 +63,8 @@ else:
 #
 if selection[3] == '1':
     print('EN4 dataset will be used for T/S input. ')
+elif selection[3] == '2':
+    print('ORAS4 dataset will be used for T/S input. ')
 else:
     print('error - incorrect T/S data type')
 #

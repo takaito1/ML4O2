@@ -26,15 +26,19 @@ warnings.filterwarnings('ignore')
 
 
 # In[2]:
-
-
+os.system('echo $USER > userid')
+usrid=np.genfromtxt('userid',dtype='<U16')
+os.system('rm userid')
+os.system(f'mkdir -p /glade/derecho/scratch/{usrid}/ML4O2_temp/')
+os.system(f'mkdir -p /glade/derecho/scratch/{usrid}/ML4O2_results/')
+#
 # version information
 ver = np.genfromtxt('data_XXX.txt',dtype='U11').tolist()
-date1='04152024' # Set this for saving today's date. Usually date1=today's date
-date2='04152024' # Set alternative date for re-running previous results
+date1='09052024' # Set this for saving today's date. Usually date1=today's date
+date2='09052024' # Set alternative date for re-running previous results
 rerun = False    # indicate again whether you are re-running previous results
 #
-dirout='/glade/derecho/scratch/ito/ML4O2_temp/'
+dirout=f'/glade/derecho/scratch/{usrid}/ML4O2_temp/'
 
 print(f'-----------------------------------------------')
 print(f' Machine Learning For Dissolved Oxygen (ML4O2) ')
@@ -81,6 +85,8 @@ else:
 #
 if selection[3] == '1':
     print('EN4 dataset will be used for T/S input. ')
+elif selection[3] == '2':
+    print('ORAS4 dataset will be used for T/S input. ')
 else:
     print('error - incorrect T/S data type')
 #
@@ -110,8 +116,12 @@ else:
 
 # Define the input and output folders
 #
-diro = '/glade/derecho/scratch/ito/WOD18_OSDCTD/'
-dirf = '/glade/campaign/univ/ugit0034/EN4/L09_20x180x360/'
+diro = f'/glade/derecho/scratch/{usrid}/WOD18_OSDCTD/'
+if selection[3] == 1:
+    dirf = '/glade/campaign/univ/ugit0034/EN4/L09_20x180x360/'
+elif selection[3] == 2:
+    dirf = '/glade/campaign/univ/ugit0034/ORAS4/TSN2/'
+#
 dirin = '/glade/campaign/univ/ugit0034/WOD18_OSDCTD/'
 fargo = '/glade/campaign/univ/ugit0034/bgcargo/o2_Global_ARGO_Type12_47lev.nc'
 fosd='_1x1bin_osd_'
@@ -165,32 +175,55 @@ elif selection[2] == '5':
 else:
     print('error - incorrect O2 data type')
 #
-if selection[1]=='2':
-    doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/o20_{bname0}_1x1_47lev.npy')
-    dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/t0_{bname0}_1x1_47lev.npy')
-    dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/s0_{bname0}_1x1_47lev.npy')
-    xx1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/lon0_{bname0}_1x1_47lev.npy')
-    yy1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/lat0_{bname0}_1x1_47lev.npy')
-    zz1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/depth0_{bname0}_1x1_47lev.npy')
-    tt1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/time0_{bname0}_1x1_47lev.npy')
-    tc1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/month0_{bname0}_1x1_47lev.npy')
-    dsga1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/sigma0_{bname0}_1x1_47lev.npy')
-    dn2a1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/N20_{bname0}_1x1_47lev.npy')
-elif selection[1]=='1':
-    doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/o20_{bname0}_1x1_47lev_ship.npy')
-    dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/t0_{bname0}_1x1_47lev_ship.npy')
-    dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/s0_{bname0}_1x1_47lev_ship.npy')
-    xx1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/lon0_{bname0}_1x1_47lev_ship.npy')
-    yy1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/lat0_{bname0}_1x1_47lev_ship.npy')
-    zz1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/depth0_{bname0}_1x1_47lev_ship.npy')
-    tt1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/time0_{bname0}_1x1_47lev_ship.npy')
-    tc1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/month0_{bname0}_1x1_47lev_ship.npy')
-    dsga1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/sigma0_{bname0}_1x1_47lev_ship.npy')
-    dn2a1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/N20_{bname0}_1x1_47lev_ship.npy')
-
-
+if selection[3]=='1':
+    if selection[1]=='2':
+        doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/o20_{bname0}_1x1_47lev.npy')
+        dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/t0_{bname0}_1x1_47lev.npy')
+        dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/s0_{bname0}_1x1_47lev.npy')
+        xx1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/lon0_{bname0}_1x1_47lev.npy')
+        yy1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/lat0_{bname0}_1x1_47lev.npy')
+        zz1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/depth0_{bname0}_1x1_47lev.npy')
+        tt1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/time0_{bname0}_1x1_47lev.npy')
+        tc1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/month0_{bname0}_1x1_47lev.npy')
+        dsga1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/sigma0_{bname0}_1x1_47lev.npy')
+        dn2a1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/N20_{bname0}_1x1_47lev.npy')
+    elif selection[1]=='1':
+        doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/o20_{bname0}_1x1_47lev_ship.npy')
+        dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/t0_{bname0}_1x1_47lev_ship.npy')
+        dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/s0_{bname0}_1x1_47lev_ship.npy')
+        xx1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/lon0_{bname0}_1x1_47lev_ship.npy')
+        yy1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/lat0_{bname0}_1x1_47lev_ship.npy')
+        zz1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/depth0_{bname0}_1x1_47lev_ship.npy')
+        tt1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/time0_{bname0}_1x1_47lev_ship.npy')
+        tc1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/month0_{bname0}_1x1_47lev_ship.npy')
+        dsga1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/sigma0_{bname0}_1x1_47lev_ship.npy')
+        dn2a1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/EN4/N20_{bname0}_1x1_47lev_ship.npy')
+#
+elif selection[3]=='2':
+    if selection[1]=='2':
+        doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/o20_{bname0}_1x1_47lev.npy')
+        dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/t0_{bname0}_1x1_47lev.npy')
+        dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/s0_{bname0}_1x1_47lev.npy')
+        xx1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/lon0_{bname0}_1x1_47lev.npy')
+        yy1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/lat0_{bname0}_1x1_47lev.npy')
+        zz1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/depth0_{bname0}_1x1_47lev.npy')
+        tt1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/time0_{bname0}_1x1_47lev.npy')
+        tc1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/month0_{bname0}_1x1_47lev.npy')
+        dsga1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/sigma0_{bname0}_1x1_47lev.npy')
+        dn2a1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/N20_{bname0}_1x1_47lev.npy')
+    elif selection[1]=='1':
+        doa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/o20_{bname0}_1x1_47lev_ship.npy')
+        dta1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/t0_{bname0}_1x1_47lev_ship.npy')
+        dsa1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/s0_{bname0}_1x1_47lev_ship.npy')
+        xx1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/lon0_{bname0}_1x1_47lev_ship.npy')
+        yy1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/lat0_{bname0}_1x1_47lev_ship.npy')
+        zz1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/depth0_{bname0}_1x1_47lev_ship.npy')
+        tt1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/time0_{bname0}_1x1_47lev_ship.npy')
+        tc1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/month0_{bname0}_1x1_47lev_ship.npy')
+        dsga1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/sigma0_{bname0}_1x1_47lev_ship.npy')
+        dn2a1 = np.load(f'/glade/campaign/univ/ugit0034/ML4O2/input_202404/ORAS4/N20_{bname0}_1x1_47lev_ship.npy')
+#
 # In[8]:
-
 
 Nsample = np.size(doa1)
 print(Nsample)
