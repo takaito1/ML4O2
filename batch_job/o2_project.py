@@ -56,11 +56,9 @@ else:
     print('error - incorrect algorithm type')
 #
 if selection[1] == '1':
-    print('Ship-based O2 data will be used. Year_end = 2021')
-    endyear=2021
+    print('Ship-based O2 data will be used. ')
 elif selection[1] == '2':
-    print('Ship-based and Argo-O2 data will be used. Year_end = 2021')
-    endyear=2021
+    print('Ship-based and Argo-O2 data will be used. ')
 else:
     print('error - incorrect input data type')
 #
@@ -79,8 +77,10 @@ else:
 #
 if selection[3] == '1':
     print('EN4 dataset will be used for T/S input. ')
+    endyear=2021
 elif selection[3] == '2':
     print('ORAS4 dataset will be used for T/S input. ')
+    endyear=2018
 else:
     print('error - incorrect T/S data type')
 #
@@ -188,7 +188,7 @@ Nx=np.size(x)
 Nt=np.size(yrs)*12
 xx,yy=np.meshgrid(xalt,y)
 #
-depth1 = dc.depth.to_numpy()
+depth1 = dc.depth.sel(depth=slice(0,1000)).to_numpy()
 Nz1 = np.size(depth1)
 #
 
