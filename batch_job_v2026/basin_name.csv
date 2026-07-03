@@ -1,0 +1,59 @@
+﻿code,name,z-layer
+1,Atlantic Ocean ,1
+2,Pacific Ocean ,1
+3,Indian Ocean ,1
+4,Mediterranean Sea ,1
+5,Baltic Sea  ,1
+6,Black Sea ,1
+7,Red Sea ,1
+8,Persian Gulf ,1
+9,Hudson Bay ,1
+10,Southern Ocean ,1
+11,Arctic Ocean ,1
+12,Sea of Japan ,1
+13,Kara Sea ,8
+14,Sulu Sea  ,10
+15,Baffin Bay  ,14
+16,East Mediterranean  ,16
+17,West Mediterranean ,19
+18,Sea of Okhotsk ,19
+19,Banda Sea ,23
+20,Caribbean Sea ,23
+21,Andaman Basin ,25
+22,North Caribbean ,26
+23,Gulf of Mexico ,26
+24,Beaufort Sea ,28
+25,South China Sea ,28
+26,Barents Sea ,28
+27,Celebes Sea ,25
+28,Aleutian Basin ,28
+29,Fiji Basin ,29
+30,North American Basin ,29
+31,West European Basin ,29
+32,Southeast Indian Basin ,29
+33,Coral Sea ,29
+34,East Indian Basin ,29
+35,Central Indian Basin ,29
+36,Southwest Atlantic Basin ,29
+37,Southeast Atlantic Basin ,29
+38,Southeast Pacific Basin ,29
+39,Guatemala Basin ,29
+40,East Caroline Basin ,30
+41,Marianas Basin ,30
+42,Philippine Sea ,30
+43,Arabian Sea ,30
+44,Chile Basin ,30
+45,Somali Basin ,30
+46,Mascarene Basin ,30
+47,Crozet Basin ,30
+48,Guinea Basin ,30
+49,Brazil Basin ,31
+50,Argentine Basin ,31
+51,Tasman Sea ,30
+52,Atlantic Indian Basin ,31
+53,Caspian Sea ,1
+54,Sulu Sea II ,14
+55,Venezuela Basin ,14
+56,Bay of Bengal ,1
+57,Java Sea ,6
+58,East Indian Atlantic Basin ,32
